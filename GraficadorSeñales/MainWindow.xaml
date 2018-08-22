@@ -20,7 +20,12 @@
         <TextBox HorizontalAlignment="Left" Height="23" Margin="196,161,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="120"/>
         <TextBlock HorizontalAlignment="Left" Margin="196,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16"><Run Text="Frecuencia "/><Run Text="de m"/><Run Text="uestreo"/><Run Text=":"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
         <Button Content="Graficar" HorizontalAlignment="Left" Margin="356,50,0,0" VerticalAlignment="Top" Width="75"/>
-        <ScrollViewer HorizontalAlignment="Left" Height="220" Margin="10,189,0,0" VerticalAlignment="Top" Width="772"/>
+        <!--Para poder agregar elementos a algo se cierra la etiqueta en 2 lineas para poder agregar cosas dentro-->
+        <ScrollViewer HorizontalAlignment="Left" Height="220" Margin="10,189,0,0" VerticalAlignment="Top" Width="772" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
+            
+            <Polyline Stroke="Red" StrokeThickness="2" Name="plnGrafica"/>
+
+        </ScrollViewer>
 
     </Grid>
 </Window>
