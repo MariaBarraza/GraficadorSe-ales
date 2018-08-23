@@ -24,21 +24,37 @@ namespace GraficadorSeñales
         {
             InitializeComponent();
 
-            plnGrafica.Points.Add(new Point(0, 10));
-            plnGrafica.Points.Add(new Point(50, 20));
-            plnGrafica.Points.Add(new Point(150, 10));
-            plnGrafica.Points.Add(new Point(200, 50));
-            plnGrafica.Points.Add(new Point(250, 0));
-            plnGrafica.Points.Add(new Point(300, 100));
-            plnGrafica.Points.Add(new Point(350, 30));
-            plnGrafica.Points.Add(new Point(450, 60));
-            plnGrafica.Points.Add(new Point(550, 10));
-            plnGrafica.Points.Add(new Point(650, 150));
-            plnGrafica.Points.Add(new Point(750, 120));
-            plnGrafica.Points.Add(new Point(850, 30));
-            plnGrafica.Points.Add(new Point(950, 200));
-            plnGrafica.Points.Add(new Point(1050, 10));
+          
 
+        }
+
+        private void btnGraficar_Click(object sender, RoutedEventArgs e)
+        { 
+        //para obtener el valor del text box se usa la propiedad .Text
+            double amplitud = double.Parse(txtAmplitud.Text);
+            double fase = double.Parse(txtFase.Text); 
+            double frecuencia = double.Parse(txtFrecuencia.Text);
+            double tiempoInicial = double.Parse(txtTiempoInicial.Text);
+            double tiempoFinal = double.Parse(txtTiempoFinal.Text);
+            double frecuenciaMuestreo = double.Parse(txtFrecuenciaMuestreo.Text);
+
+            //instancia de la clase señal senoidal
+            SeñalSenoidal señal = new SeñalSenoidal(amplitud, fase, frecuencia);
+
+            //calcular el periodo 
+
+            double periodoMuestreo = 1 / frecuenciaMuestreo;
+
+            //delimitar el tiempo en el que se grafica y limpiar la grafica al terminar
+
+            plnGrafica.Points.Clear();
+
+            for(double i= tiempoInicial; i<= tiempoFinal; i += periodoMuestreo)
+            {
+                // multiplicar da escalas
+                plnGrafica.Points.Add(new Point(i * scrContenedor.Width ,(señal.Evaluar(i) * ((scrContenedor.Height/2) - 30) * -1) + (scrContenedor.Height/2)));
+            }
+           
         }
     }
 }
