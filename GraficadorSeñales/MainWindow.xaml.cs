@@ -51,10 +51,27 @@ namespace GraficadorSeñales
 
             for(double i= tiempoInicial; i<= tiempoFinal; i += periodoMuestreo)
             {
-                // multiplicar da escalas
-                plnGrafica.Points.Add(new Point(i * scrContenedor.Width ,(señal.Evaluar(i) * ((scrContenedor.Height/2) - 30) * -1) + (scrContenedor.Height/2)));
+                double valorMuestra = señal.Evaluar(i);
+
+                if (Math.Abs(valorMuestra) > señal.AmplitudMaxima)
+                {
+                     señal.AmplitudMaxima = Math.Abs(valorMuestra);
+                }
+
+                //se van añadiendo las muestras a las listas
+                señal.Muestras.Add(new Muestra(i,valorMuestra));
+                
             }
-           
+            //recorrer una coleccion o arreglo
+            //muestra toma el valor de señal.muestra en cada recorrido del ciclo
+            foreach (Muestra muestra in señal.Muestras)
+            {
+                //se evalua la señal, luego se ajusta y de ahi se agrega el punto
+                plnGrafica.Points.Add(new Point(muestra.X * scrContenedor.Width, (muestra.Y * ((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
+            }
+
+            
+            
         }
     }
 }
