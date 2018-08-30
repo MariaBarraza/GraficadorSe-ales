@@ -24,15 +24,15 @@ namespace GraficadorSeñales
         {
             InitializeComponent();
 
-          
+
 
         }
 
         private void btnGraficar_Click(object sender, RoutedEventArgs e)
-        { 
-        //para obtener el valor del text box se usa la propiedad .Text
+        {
+            //para obtener el valor del text box se usa la propiedad .Text
             double amplitud = double.Parse(txtAmplitud.Text);
-            double fase = double.Parse(txtFase.Text); 
+            double fase = double.Parse(txtFase.Text);
             double frecuencia = double.Parse(txtFrecuencia.Text);
             double tiempoInicial = double.Parse(txtTiempoInicial.Text);
             double tiempoFinal = double.Parse(txtTiempoFinal.Text);
@@ -49,18 +49,18 @@ namespace GraficadorSeñales
 
             plnGrafica.Points.Clear();
 
-            for(double i= tiempoInicial; i<= tiempoFinal; i += periodoMuestreo)
+            for (double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
             {
                 double valorMuestra = señal.Evaluar(i);
 
                 if (Math.Abs(valorMuestra) > señal.AmplitudMaxima)
                 {
-                     señal.AmplitudMaxima = Math.Abs(valorMuestra);
+                    señal.AmplitudMaxima = Math.Abs(valorMuestra);
                 }
 
                 //se van añadiendo las muestras a las listas
-                señal.Muestras.Add(new Muestra(i,valorMuestra));
-                
+                señal.Muestras.Add(new Muestra(i, valorMuestra));
+
             }
             //recorrer una coleccion o arreglo
             //muestra toma el valor de señal.muestra en cada recorrido del ciclo
@@ -70,8 +70,37 @@ namespace GraficadorSeñales
                 plnGrafica.Points.Add(new Point(muestra.X * scrContenedor.Width, (muestra.Y * ((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
             }
 
-            
-            
+
+
+        }
+
+        private void btnGraficarRampa_Click(object sender, RoutedEventArgs e)
+        {
+            double tiempoInicial = double.Parse(txtTiempoInicial.Text);
+            double tiempoFinal = double.Parse(txtTiempoFinal.Text);
+            double frecuenciaMuestreo = double.Parse(txtFrecuenciaMuestreo.Text);
+
+            SeñalRampa señal = new SeñalRampa();
+
+            double periodoMuestreo = 1 / frecuenciaMuestreo;
+            plnGrafica.Points.Clear();
+
+            for (double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
+            {
+                double valorMuestra = señal.EvaluarRampa(i);
+                señal.Muestras.Add(new Muestra(i, valorMuestra));
+
+                //se van añadiendo las muestras a las listas
+                señal.Muestras.Add(new Muestra(i, valorMuestra)); 
+
+            }
+            foreach (Muestra muestra in señal.Muestras)
+            {
+                //se evalua la señal, luego se ajusta y de ahi se agrega el punto
+                plnGrafica.Points.Add(new Point(muestra.X * scrContenedor.Width, (muestra.Y * ((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
+            }
+
         }
     }
 }
+

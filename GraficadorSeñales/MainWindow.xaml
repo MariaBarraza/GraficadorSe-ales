@@ -19,13 +19,14 @@
         <TextBlock HorizontalAlignment="Left" Margin="196,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Tiempo Final:"/>
         <TextBox x:Name="txtFrecuenciaMuestreo" HorizontalAlignment="Left" Height="23" Margin="196,161,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="120"/>
         <TextBlock HorizontalAlignment="Left" Margin="196,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Text="Frecuencia de muestreo: "/>
-        <Button x:Name="btnGraficar" Content="Graficar" HorizontalAlignment="Left" Margin="356,50,0,0" VerticalAlignment="Top" Width="75" Click="btnGraficar_Click"/>
+        <Button x:Name="btnGraficar" Content="Graficar Señal Senoidal" HorizontalAlignment="Left" Margin="356,50,0,0" VerticalAlignment="Top" Width="176" Click="btnGraficar_Click"/>
         <!--Para poder agregar elementos a algo se cierra la etiqueta en 2 lineas para poder agregar cosas dentro-->
         <ScrollViewer x:Name="scrContenedor" HorizontalAlignment="Left" Height="220" Margin="10,189,0,0" VerticalAlignment="Top" Width="772" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
             
             <Polyline Stroke="Red" StrokeThickness="2" Name="plnGrafica"/>
 
         </ScrollViewer>
+        <Button x:Name="btnGraficarRampa" Content="Graficar Señal Rampa" HorizontalAlignment="Left" Margin="356,80,0,0" VerticalAlignment="Top" Width="176" Click="btnGraficarRampa_Click"/>
 
     </Grid>
 </Window>
