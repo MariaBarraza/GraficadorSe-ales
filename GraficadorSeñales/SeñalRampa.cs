@@ -10,15 +10,17 @@ namespace GraficadorSeñales
     {
         public List<Muestra> Muestras { get; set; }
 
+        //Propiedades
         public SeñalRampa()
         {
             Muestras = new List<Muestra>();
         }
         
-
+        //Logica Evaluacion
         public double EvaluarRampa(double tiempo)
         {
             double resultado=0;
+
             if (tiempo >= 0)
             {
                 resultado = tiempo;
@@ -28,6 +30,7 @@ namespace GraficadorSeñales
             {
                 resultado = 0;
             }
+
             return resultado;
         }
 

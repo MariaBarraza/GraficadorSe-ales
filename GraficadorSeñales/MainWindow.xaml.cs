@@ -76,15 +76,21 @@ namespace GraficadorSeñales
 
         private void btnGraficarRampa_Click(object sender, RoutedEventArgs e)
         {
+            //tomar valores
             double tiempoInicial = double.Parse(txtTiempoInicial.Text);
             double tiempoFinal = double.Parse(txtTiempoFinal.Text);
             double frecuenciaMuestreo = double.Parse(txtFrecuenciaMuestreo.Text);
 
+            //instancia
             SeñalRampa señal = new SeñalRampa();
 
+            //calcular periodomuestreo
             double periodoMuestreo = 1 / frecuenciaMuestreo;
+
+            //limpiar puntos
             plnGrafica.Points.Clear();
 
+            //ciclo para conseguir las muestras
             for (double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
             {
                 double valorMuestra = señal.EvaluarRampa(i);
@@ -94,6 +100,8 @@ namespace GraficadorSeñales
                 señal.Muestras.Add(new Muestra(i, valorMuestra)); 
 
             }
+
+            //ciclo para recorrer muestras
             foreach (Muestra muestra in señal.Muestras)
             {
                 //se evalua la señal, luego se ajusta y de ahi se agrega el punto
