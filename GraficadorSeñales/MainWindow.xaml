@@ -21,12 +21,24 @@
         <TextBlock HorizontalAlignment="Left" Margin="196,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Text="Frecuencia de muestreo: "/>
         <Button x:Name="btnGraficar" Content="Graficar Señal Senoidal" HorizontalAlignment="Left" Margin="356,50,0,0" VerticalAlignment="Top" Width="176" Click="btnGraficar_Click"/>
         <!--Para poder agregar elementos a algo se cierra la etiqueta en 2 lineas para poder agregar cosas dentro-->
-        <ScrollViewer x:Name="scrContenedor" HorizontalAlignment="Left" Height="220" Margin="10,189,0,0" VerticalAlignment="Top" Width="772" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
-            
+        <ScrollViewer x:Name="scrContenedor" HorizontalAlignment="Left" Height="220" Margin="73,189,0,0" VerticalAlignment="Top" Width="709" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
+
             <Polyline Stroke="Red" StrokeThickness="2" Name="plnGrafica"/>
 
         </ScrollViewer>
         <Button x:Name="btnGraficarRampa" Content="Graficar Señal Rampa" HorizontalAlignment="Left" Margin="356,80,0,0" VerticalAlignment="Top" Width="176" Click="btnGraficarRampa_Click"/>
+        <TextBlock x:Name="lblAmplitudMaximaPositivaY" HorizontalAlignment="Left" Margin="10,207,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="63">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.554"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock x:Name="lblAmplitudMaximaNegativaY" HorizontalAlignment="Left" Margin="10,381,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="63"/>
+        <TextBlock x:Name="lblAmplitud0" HorizontalAlignment="Left" Margin="10,301,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

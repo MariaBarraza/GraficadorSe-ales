@@ -53,6 +53,7 @@ namespace GraficadorSeñales
             {
                 double valorMuestra = señal.Evaluar(i);
 
+                //se calcula el numero mas alto que puede tomar la señal
                 if (Math.Abs(valorMuestra) > señal.AmplitudMaxima)
                 {
                     señal.AmplitudMaxima = Math.Abs(valorMuestra);
@@ -67,9 +68,11 @@ namespace GraficadorSeñales
             foreach (Muestra muestra in señal.Muestras)
             {
                 //se evalua la señal, luego se ajusta y de ahi se agrega el punto
-                plnGrafica.Points.Add(new Point(muestra.X * scrContenedor.Width, (muestra.Y * ((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
+                plnGrafica.Points.Add(new Point(muestra.X * scrContenedor.Width, (muestra.Y / señal.AmplitudMaxima * ((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
             }
-
+            //cambiar los valores de la etiqueta
+            lblAmplitudMaximaPositivaY.Text = señal.AmplitudMaxima.ToString();
+            lblAmplitudMaximaNegativaY.Text = "-" + señal.AmplitudMaxima.ToString();
 
 
         }
