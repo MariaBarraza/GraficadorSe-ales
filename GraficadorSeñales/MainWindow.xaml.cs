@@ -49,6 +49,16 @@ namespace GraficadorSeñales
 
             plnGrafica.Points.Clear();
 
+            //punto del principio
+            plnEjeX.Points.Add(new Point(0 ,scrContenedor.Height / 2));
+            //punto del final
+            plnEjeX.Points.Add(new Point((tiempoFinal - tiempoInicial) * scrContenedor.Width, scrContenedor.Height / 2));
+
+            //punto del principio
+            plnEjeY.Points.Add(new Point((0 - tiempoInicial) * scrContenedor.Width, (((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
+            //punto del final
+            plnEjeY.Points.Add(new Point((0 - tiempoInicial) * scrContenedor.Width, (-1 * ((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
+
             for (double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
             {
                 double valorMuestra = señal.Evaluar(i);
@@ -68,8 +78,11 @@ namespace GraficadorSeñales
             foreach (Muestra muestra in señal.Muestras)
             {
                 //se evalua la señal, luego se ajusta y de ahi se agrega el punto
-                plnGrafica.Points.Add(new Point(muestra.X * scrContenedor.Width, (muestra.Y / señal.AmplitudMaxima * ((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
+                plnGrafica.Points.Add(new Point((muestra.X - tiempoInicial) * scrContenedor.Width, (muestra.Y / señal.AmplitudMaxima * ((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
             }
+
+            
+
             //cambiar los valores de la etiqueta
             lblAmplitudMaximaPositivaY.Text = señal.AmplitudMaxima.ToString();
             lblAmplitudMaximaNegativaY.Text = "-" + señal.AmplitudMaxima.ToString();
