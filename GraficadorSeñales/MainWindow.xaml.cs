@@ -39,54 +39,61 @@ namespace GraficadorSeñales
             double frecuenciaMuestreo = double.Parse(txtFrecuenciaMuestreo.Text);
 
             //instancia de la clase señal senoidal
-            SeñalSenoidal señal = new SeñalSenoidal(amplitud, fase, frecuencia);
+            Señal señal;
+            switch(cbTipoSeñal.SelectedIndex)
+            {
+                //señal senoidal
+                case 0: 
+                    señal = new SeñalSenoidal(amplitud, fase, frecuencia);
+                    break;
+                case 1:
+                    señal = new SeñalRampa();
+                    break;
+                default:
+                    señal = null;
+                    break;
+            }
 
-            //calcular el periodo 
+            //se establecen los valores para la funcion
+            señal.TiempoInicial = tiempoInicial;
+            señal.TiempoFinal = tiempoFinal;
+            señal.FrecuenciaMuestreo = frecuenciaMuestreo;
+            
+            //se ejecuta la funcion
+            señal.construirSeñalDigital();
 
-            double periodoMuestreo = 1 / frecuenciaMuestreo;
-
-            //delimitar el tiempo en el que se grafica y limpiar la grafica al terminar
-
+            // limpiar la grafica
             plnGrafica.Points.Clear();
 
-            //punto del principio
-            plnEjeX.Points.Add(new Point(0 ,scrContenedor.Height / 2));
-            //punto del final
-            plnEjeX.Points.Add(new Point((tiempoFinal - tiempoInicial) * scrContenedor.Width, scrContenedor.Height / 2));
-
-            //punto del principio
-            plnEjeY.Points.Add(new Point((0 - tiempoInicial) * scrContenedor.Width, (((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
-            //punto del final
-            plnEjeY.Points.Add(new Point((0 - tiempoInicial) * scrContenedor.Width, (-1 * ((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
-
-            for (double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
+ 
+           if(señal != null)
             {
-                double valorMuestra = señal.Evaluar(i);
-
-                //se calcula el numero mas alto que puede tomar la señal
-                if (Math.Abs(valorMuestra) > señal.AmplitudMaxima)
+                //recorrer una coleccion o arreglo
+                //muestra toma el valor de señal.muestra en cada recorrido del ciclo
+                foreach (Muestra muestra in señal.Muestras)
                 {
-                    señal.AmplitudMaxima = Math.Abs(valorMuestra);
+                    //se evalua la señal, luego se ajusta y de ahi se agrega el punto
+                    plnGrafica.Points.Add(new Point((muestra.X - tiempoInicial) * scrContenedor.Width, (muestra.Y / señal.AmplitudMaxima * ((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
                 }
 
-                //se van añadiendo las muestras a las listas
-                señal.Muestras.Add(new Muestra(i, valorMuestra));
-
-            }
-            //recorrer una coleccion o arreglo
-            //muestra toma el valor de señal.muestra en cada recorrido del ciclo
-            foreach (Muestra muestra in señal.Muestras)
-            {
-                //se evalua la señal, luego se ajusta y de ahi se agrega el punto
-                plnGrafica.Points.Add(new Point((muestra.X - tiempoInicial) * scrContenedor.Width, (muestra.Y / señal.AmplitudMaxima * ((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
+                //cambiar los valores de la etiqueta
+                lblAmplitudMaximaPositivaY.Text = señal.AmplitudMaxima.ToString();
+                lblAmplitudMaximaNegativaY.Text = "-" + señal.AmplitudMaxima.ToString();
             }
 
-            
+            //Graficando el eje de X
+            plnEjeX.Points.Clear();
+            //Punto de inicio.
+            plnEjeX.Points.Add(new Point(0, (scrContenedor.Height / 2)));
+            //Punto de fin.
+            plnEjeX.Points.Add(new Point((tiempoFinal - tiempoInicial) * scrContenedor.Width, (scrContenedor.Height / 2)));
 
-            //cambiar los valores de la etiqueta
-            lblAmplitudMaximaPositivaY.Text = señal.AmplitudMaxima.ToString();
-            lblAmplitudMaximaNegativaY.Text = "-" + señal.AmplitudMaxima.ToString();
-
+            //Graficando el eje de Y
+            plnEjeY.Points.Clear();
+            //Punto de inicio.
+            plnEjeY.Points.Add(new Point(0 - tiempoInicial * scrContenedor.Width, scrContenedor.Height));
+            //Punto de fin.
+            plnEjeY.Points.Add(new Point(0 - tiempoInicial * scrContenedor.Width, scrContenedor.Height * -1));
 
         }
 
@@ -109,7 +116,7 @@ namespace GraficadorSeñales
             //ciclo para conseguir las muestras
             for (double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
             {
-                double valorMuestra = señal.EvaluarRampa(i);
+                double valorMuestra = señal.Evaluar(i);
                 señal.Muestras.Add(new Muestra(i, valorMuestra));
 
                 //se van añadiendo las muestras a las listas

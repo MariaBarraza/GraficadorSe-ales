@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GraficadorSeñales
 {
-    class SeñalSenoidal
+    class SeñalSenoidal : Señal
     {
 
         //Propiedades de la clase necesarios para la funcion senoidal
@@ -14,12 +14,7 @@ namespace GraficadorSeñales
         public double Fase { get; set; }
         public double Frecuencia { get; set; }
 
-        //Es un arreglo dinamico
-        public List<Muestra> Muestras { get; set; }
-        
-        public double AmplitudMaxima { get; set; }
-        
-
+            
         //Constructor de la clase
 
         public SeñalSenoidal()
@@ -41,7 +36,7 @@ namespace GraficadorSeñales
         }
 
         //funcion matematica que permite evaluar segun un instante de tiempo
-        public double Evaluar(double tiempo)
+        override public double Evaluar(double tiempo)
         {
             double resultado = Amplitud * Math.Sin(((2 * Math.PI * Frecuencia) * tiempo) + Fase);
             return resultado;
