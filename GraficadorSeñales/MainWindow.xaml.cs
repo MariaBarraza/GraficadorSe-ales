@@ -22,7 +22,7 @@ namespace GraficadorSeñales
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent(); //cualquier codigo que se ponga debajo de esta se ejecuta al iniciar el programa
 
 
 
@@ -31,9 +31,7 @@ namespace GraficadorSeñales
         private void btnGraficar_Click(object sender, RoutedEventArgs e)
         {
             //para obtener el valor del text box se usa la propiedad .Text
-            double amplitud = double.Parse(txtAmplitud.Text);
-            double fase = double.Parse(txtFase.Text);
-            double frecuencia = double.Parse(txtFrecuencia.Text);
+            
             double tiempoInicial = double.Parse(txtTiempoInicial.Text);
             double tiempoFinal = double.Parse(txtTiempoFinal.Text);
             double frecuenciaMuestreo = double.Parse(txtFrecuenciaMuestreo.Text);
@@ -43,9 +41,16 @@ namespace GraficadorSeñales
             switch(cbTipoSeñal.SelectedIndex)
             {
                 //señal senoidal
-                case 0: 
+                case 0:
+                    //el primer hijo del panel configuracion es la configuracion senoidal y es de otro tipo asi que se hace un casting y asi se puede acceder a sus propiedades, ademas como txtamplitud es tipo texto se usa parse
+                    //nota: los hijos son los elementos de los contenedores
+                    double amplitud = double.Parse(((ConfiguracionSeñalSenoidal) (panelConfiguracion.Children[0])).txtAmplitud.Text);
+                    double fase = double.Parse(((ConfiguracionSeñalSenoidal)(panelConfiguracion.Children[0])).txtFase.Text);
+                    double frecuencia = double.Parse(((ConfiguracionSeñalSenoidal)(panelConfiguracion.Children[0])).txtFrecuencia.Text);
+                    
                     señal = new SeñalSenoidal(amplitud, fase, frecuencia);
                     break;
+                //rampa
                 case 1:
                     señal = new SeñalRampa();
                     break;
@@ -131,6 +136,31 @@ namespace GraficadorSeñales
                 plnGrafica.Points.Add(new Point(muestra.X * scrContenedor.Width, (muestra.Y * ((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
             }
 
+        }
+
+        private void cbTipoSeñal_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+                //quita los elementos que puede tener el panel
+                panelConfiguracion.Children.Clear();
+
+                switch (cbTipoSeñal.SelectedIndex)
+                {
+                    case 0: //senoidal
+                        //se añaden los elementos al panel (los hijos)
+                        panelConfiguracion.Children.Add(
+                          new ConfiguracionSeñalSenoidal() 
+                            );
+
+                        break;
+                    case 1: //Rampa
+                        break;
+                    default:
+                        break;
+                }
+           
+
+           
         }
     }
 }
