@@ -34,15 +34,17 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
+        <!-- Importa el orden cuando se trabaja con eventos-->
         <TextBlock x:Name="lblAmplitudMaximaNegativaY" HorizontalAlignment="Left" Margin="10,381,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="63"/>
         <TextBlock x:Name="lblAmplitud0" HorizontalAlignment="Left" Margin="10,301,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
         <!-- Se crea el stack panel primero que el combo box para que al añadir el evento del combobox el stack panel ya este creado -->
         <StackPanel x:Name="panelConfiguracion" HorizontalAlignment="Left" Height="184" Margin="10,0,0,0" VerticalAlignment="Top" Width="393" RenderTransformOrigin="-0.794,-0.309"/>
-        <!-- Se crea el combo box -->
+        <!-- Se crea el combo box con el evento selected index -->
         <ComboBox Name="cbTipoSeñal" SelectedIndex="0" HorizontalAlignment="Left" Margin="582,98,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="cbTipoSeñal_SelectionChanged">
             <!-- Se crean las opciones del combobox -->
             <ComboBoxItem>Señal Senoidal</ComboBoxItem>
             <ComboBoxItem>Señal Rampa</ComboBoxItem>
+            <ComboBoxItem>Señal Exponencial</ComboBoxItem>
         </ComboBox>
 
         <TextBlock HorizontalAlignment="Left" Margin="582,77,0,0" TextWrapping="Wrap" Text="Tipo de Señal:" VerticalAlignment="Top"/>

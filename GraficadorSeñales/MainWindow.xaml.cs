@@ -42,17 +42,21 @@ namespace GraficadorSeñales
             {
                 //señal senoidal
                 case 0:
-                    //el primer hijo del panel configuracion es la configuracion senoidal y es de otro tipo asi que se hace un casting y asi se puede acceder a sus propiedades, ademas como txtamplitud es tipo texto se usa parse
+                    //el primer hijo del panel configuracion es la configuracion senoidal y es de otro tipo (ui collection)asi que se hace un casting y asi se puede acceder a sus propiedades, ademas como txtamplitud es tipo texto se usa parse
                     //nota: los hijos son los elementos de los contenedores
-                    double amplitud = double.Parse(((ConfiguracionSeñalSenoidal) (panelConfiguracion.Children[0])).txtAmplitud.Text);
-                    double fase = double.Parse(((ConfiguracionSeñalSenoidal)(panelConfiguracion.Children[0])).txtFase.Text);
-                    double frecuencia = double.Parse(((ConfiguracionSeñalSenoidal)(panelConfiguracion.Children[0])).txtFrecuencia.Text);
+                    double amplitud = double.Parse(((ConfiguracionSeñalSenoidal) panelConfiguracion.Children[0]).txtAmplitud.Text);
+                    double fase = double.Parse(((ConfiguracionSeñalSenoidal) panelConfiguracion.Children[0]).txtFase.Text);
+                    double frecuencia = double.Parse(((ConfiguracionSeñalSenoidal) panelConfiguracion.Children[0]).txtFrecuencia.Text);
                     
                     señal = new SeñalSenoidal(amplitud, fase, frecuencia);
                     break;
                 //rampa
                 case 1:
                     señal = new SeñalRampa();
+                    break;
+                case 2:
+                    double alpha = double.Parse(((ConfiguracionSeñalExponencial) panelConfiguracion.Children[0]).txtAlpha.Text);
+                    señal = new SeñalExponencial(alpha);
                     break;
                 default:
                     señal = null;
@@ -155,7 +159,12 @@ namespace GraficadorSeñales
                         break;
                     case 1: //Rampa
                         break;
-                    default:
+                    case 2:
+                    panelConfiguracion.Children.Add(
+                  new ConfiguracionSeñalExponencial()
+                    );
+                    break;
+                default:
                         break;
                 }
            

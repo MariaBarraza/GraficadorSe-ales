@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GraficadorSeñales"
              mc:Ignorable="d" 
-             d:DesignHeight="209.756" d:DesignWidth="168.293">
+             d:DesignHeight="187.059" d:DesignWidth="152.64">
     <Grid >
-        <TextBox x:Name="txtAmplitud" HorizontalAlignment="Left" Height="23" Margin="22,50,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="22,29,0,0" TextWrapping="Wrap" Text="Amplitud:" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtFase" HorizontalAlignment="Left" Height="23" Margin="22,103,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="22,82,0,0" TextWrapping="Wrap" Text="Fase:" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtFrecuencia" HorizontalAlignment="Left" Height="23" Margin="22,161,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="22,140,0,0" TextWrapping="Wrap" Text="Frecuencia:" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtAmplitud" HorizontalAlignment="Left" Height="23" Margin="20,34,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="20,13,0,0" TextWrapping="Wrap" Text="Amplitud:" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtFase" HorizontalAlignment="Left" Height="23" Margin="20,88,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="20,66,0,0" TextWrapping="Wrap" Text="Fase:" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtFrecuencia" HorizontalAlignment="Left" Height="23" Margin="20,145,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="20,124,0,0" TextWrapping="Wrap" Text="Frecuencia:" VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>
