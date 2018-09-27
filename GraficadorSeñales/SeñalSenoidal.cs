@@ -36,7 +36,7 @@ namespace GraficadorSeñales
         }
 
         //funcion matematica que permite evaluar segun un instante de tiempo
-        override public double Evaluar(double tiempo)
+        override public double evaluar(double tiempo)
         {
             double resultado = Amplitud * Math.Sin(((2 * Math.PI * Frecuencia) * tiempo) + Fase);
             return resultado;

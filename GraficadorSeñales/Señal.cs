@@ -10,13 +10,14 @@ namespace GraficadorSeñales
     {
         //Es un arreglo dinamico
         public List<Muestra> Muestras { get; set; }
+
         public double AmplitudMaxima { get; set; }
         public double TiempoInicial { get; set; }
         public double TiempoFinal { get; set; }
         public double FrecuenciaMuestreo { get; set; }
         
 
-        public abstract double Evaluar(double tiempo);
+        public abstract double evaluar(double tiempo);
 
         public void construirSeñalDigital()
         {
@@ -26,7 +27,7 @@ namespace GraficadorSeñales
             //Se construye la señal digital, se delimita el tiempo con el for
             for (double i = TiempoInicial; i <= TiempoFinal; i += periodoMuestreo)
             {
-                double valorMuestra = Evaluar(i);
+                double valorMuestra = evaluar(i);
 
                 //se calcula el numero mas alto que puede tomar la señal
                 if (Math.Abs(valorMuestra) > AmplitudMaxima)
@@ -39,5 +40,39 @@ namespace GraficadorSeñales
             }
 
         }
+
+        public void escalar(double factor)
+        {
+            //por cara muestra se va a realizar esto
+           foreach(Muestra muestra in Muestras)
+            {
+                //se multiplica por Y para escalar, no por X para conservar el instante de tiempo
+                muestra.Y *= factor;
+            }
+        }
+
+        public void actualizarAmplitudMaxima()
+        {
+            AmplitudMaxima = 0;
+            
+            foreach(Muestra muestra in Muestras)
+            {
+                if(Math.Abs(muestra.Y) > AmplitudMaxima)
+                {
+                    AmplitudMaxima = Math.Abs(muestra.Y);
+                }
+            }
+        }
+
+        public void desplazar(double factor)
+        {
+            //por cara muestra se va a realizar esto
+            foreach (Muestra muestra in Muestras)
+            {
+                //se suma en Y para desplazar, no por X para conservar el instante de tiempo
+                muestra.Y += factor;
+            }
+        }
+
     }
 }

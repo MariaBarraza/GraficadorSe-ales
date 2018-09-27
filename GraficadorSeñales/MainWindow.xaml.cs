@@ -67,9 +67,20 @@ namespace GraficadorSeñales
             señal.TiempoInicial = tiempoInicial;
             señal.TiempoFinal = tiempoFinal;
             señal.FrecuenciaMuestreo = frecuenciaMuestreo;
+
             
             //se ejecuta la funcion
             señal.construirSeñalDigital();
+
+            //Escalar
+            double factorEscala = double.Parse(txtFactorEscalaAmplitud.Text);
+            señal.escalar(factorEscala);
+
+            //Desplazar
+            double factorDesplazar = double.Parse(txtFactorDesplazamiento.Text);
+            señal.desplazar(factorDesplazar);
+
+            señal.actualizarAmplitudMaxima();
 
             // limpiar la grafica
             plnGrafica.Points.Clear();
@@ -125,7 +136,7 @@ namespace GraficadorSeñales
             //ciclo para conseguir las muestras
             for (double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
             {
-                double valorMuestra = señal.Evaluar(i);
+                double valorMuestra = señal.evaluar(i);
                 señal.Muestras.Add(new Muestra(i, valorMuestra));
 
                 //se van añadiendo las muestras a las listas
@@ -166,10 +177,33 @@ namespace GraficadorSeñales
                     break;
                 default:
                         break;
-                }
-           
+                } 
+        }
 
+        private void cbAmplitud_Checked(object sender, RoutedEventArgs e)
+        {
+            txtFactorEscalaAmplitud.IsEnabled = true;
            
+        }
+
+        private void cbAmplitud_UnChecked(object sender, RoutedEventArgs e)
+        {
+            txtFactorEscalaAmplitud.IsEnabled = false;
+            txtFactorEscalaAmplitud.Text = "1";
+        }
+
+        
+
+        private void cbDesplazar_Checked(object sender, RoutedEventArgs e)
+        {
+            txtFactorDesplazamiento.IsEnabled = true;
+
+        }
+
+        private void cbDesplazar_UnChecked(object sender, RoutedEventArgs e)
+        {
+            txtFactorDesplazamiento.IsEnabled = false;
+            txtFactorDesplazamiento.Text = "0";
         }
     }
 }

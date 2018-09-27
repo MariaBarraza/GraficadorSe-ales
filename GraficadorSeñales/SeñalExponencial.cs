@@ -26,7 +26,7 @@ namespace GraficadorSeñales
 
         //Logica Evaluacion
 
-        override public double Evaluar(double tiempo)
+        override public double evaluar(double tiempo)
         {
             double resultado = Math.Exp(tiempo*Alpha);
 
