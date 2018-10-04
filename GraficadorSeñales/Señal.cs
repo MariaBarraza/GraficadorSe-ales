@@ -66,11 +66,29 @@ namespace GraficadorSeñales
 
         public void desplazar(double factor)
         {
-            //por cara muestra se va a realizar esto
+            //por cada muestra se va a realizar esto
             foreach (Muestra muestra in Muestras)
             {
                 //se suma en Y para desplazar, no por X para conservar el instante de tiempo
                 muestra.Y += factor;
+            }
+        }
+
+        public void truncar(double umbral)
+        {
+            //por cada muestra se va a realizar esto
+            foreach (Muestra muestra in Muestras)
+            {
+                //se suma en Y para desplazar, no por X para conservar el instante de tiempo
+                if(muestra.Y>umbral)
+                {
+                    muestra.Y = umbral;
+                }
+                else
+                    if(muestra.Y < -umbral)
+                {
+                    muestra.Y = -umbral;
+                }
             }
         }
 

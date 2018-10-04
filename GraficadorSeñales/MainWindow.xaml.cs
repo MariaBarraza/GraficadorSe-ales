@@ -72,16 +72,28 @@ namespace GraficadorSeñales
             //se ejecuta la funcion
             señal.construirSeñalDigital();
 
-            //Escalar
-            double factorEscala = double.Parse(txtFactorEscalaAmplitud.Text);
-            señal.escalar(factorEscala);
+            if ((bool)cbAmplitud.IsChecked)
+            {
+                //Escalar
+                double factorEscala = double.Parse(txtFactorEscalaAmplitud.Text);
+                señal.escalar(factorEscala);
+            }
 
-            //Desplazar
-            double factorDesplazar = double.Parse(txtFactorDesplazamiento.Text);
-            señal.desplazar(factorDesplazar);
+            if ((bool)cbDesplazar.IsChecked)
+            {
+                //Desplazar
+                double factorDesplazar = double.Parse(txtFactorDesplazamiento.Text);
+                señal.desplazar(factorDesplazar);
+            }
 
-            señal.actualizarAmplitudMaxima();
+            if ((bool)cbTruncar.IsChecked)
+            {
+                //Truncar
+                double factorTruncar = double.Parse(txtFactorTruncar.Text);
+                señal.truncar(factorTruncar);
 
+                señal.actualizarAmplitudMaxima();
+            }
             // limpiar la grafica
             plnGrafica.Points.Clear();
 
@@ -189,7 +201,6 @@ namespace GraficadorSeñales
         private void cbAmplitud_UnChecked(object sender, RoutedEventArgs e)
         {
             txtFactorEscalaAmplitud.IsEnabled = false;
-            txtFactorEscalaAmplitud.Text = "1";
         }
 
         
@@ -203,7 +214,18 @@ namespace GraficadorSeñales
         private void cbDesplazar_UnChecked(object sender, RoutedEventArgs e)
         {
             txtFactorDesplazamiento.IsEnabled = false;
-            txtFactorDesplazamiento.Text = "0";
+        }
+
+
+        private void cbTruncar_Checked(object sender, RoutedEventArgs e)
+        {
+            txtFactorTruncar.IsEnabled = true;
+
+        }
+
+        private void cbTruncar_UnChecked(object sender, RoutedEventArgs e)
+        {
+            txtFactorTruncar.IsEnabled = false;
         }
     }
 }

@@ -54,6 +54,9 @@
         <TextBlock HorizontalAlignment="Left" Margin="428,70,0,0" TextWrapping="Wrap" Text="Desplazamiento:" VerticalAlignment="Top"/>
         <CheckBox x:Name="cbAmplitud" Content="" HorizontalAlignment="Left" Margin="553,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.488,-0.227" Checked="cbAmplitud_Checked" Unchecked="cbAmplitud_UnChecked"/>
         <CheckBox x:Name="cbDesplazar" Content="" HorizontalAlignment="Left" Margin="552,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.488,-0.227" Checked="cbDesplazar_Checked" Unchecked="cbDesplazar_UnChecked"/>
+        <TextBox x:Name="txtFactorTruncar" HorizontalAlignment="Left" Height="23" Margin="429,144,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <TextBlock HorizontalAlignment="Left" Margin="429,123,0,0" TextWrapping="Wrap" Text="Umbral:" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbTruncar" Content="" HorizontalAlignment="Left" Margin="553,149,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.488,-0.227" Checked="cbTruncar_Checked" Unchecked="cbTruncar_UnChecked"/>
 
 
     </Grid>
