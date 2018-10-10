@@ -109,8 +109,9 @@ namespace GraficadorSeñales
                 }
 
                 //cambiar los valores de la etiqueta
-                lblAmplitudMaximaPositivaY.Text = señal.AmplitudMaxima.ToString();
-                lblAmplitudMaximaNegativaY.Text = "-" + señal.AmplitudMaxima.ToString();
+                //La F es que da el formato para redondear a 2 decimales, la funcion ToString puede recibir un parametro que es el que va a decidir en que formato va a estar,existen varios parametros
+                lblAmplitudMaximaPositivaY.Text = señal.AmplitudMaxima.ToString("F");
+                lblAmplitudMaximaNegativaY.Text = "-" + señal.AmplitudMaxima.ToString("F");
             }
 
             //Graficando el eje de X
@@ -226,6 +227,11 @@ namespace GraficadorSeñales
         private void cbTruncar_UnChecked(object sender, RoutedEventArgs e)
         {
             txtFactorTruncar.IsEnabled = false;
+        }
+
+        private void cbTipoSeñal_SegundaSeñal_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
