@@ -31,23 +31,25 @@ namespace GraficadorSeñales
         private void btnGraficar_Click(object sender, RoutedEventArgs e)
         {
             //para obtener el valor del text box se usa la propiedad .Text
-            
+
             double tiempoInicial = double.Parse(txtTiempoInicial.Text);
             double tiempoFinal = double.Parse(txtTiempoFinal.Text);
             double frecuenciaMuestreo = double.Parse(txtFrecuenciaMuestreo.Text);
 
             //instancia de la clase señal senoidal
             Señal señal;
-            switch(cbTipoSeñal.SelectedIndex)
+            Señal segundaSeñal;
+
+            switch (cbTipoSeñal.SelectedIndex)
             {
                 //señal senoidal
                 case 0:
                     //el primer hijo del panel configuracion es la configuracion senoidal y es de otro tipo (ui collection)asi que se hace un casting y asi se puede acceder a sus propiedades, ademas como txtamplitud es tipo texto se usa parse
                     //nota: los hijos son los elementos de los contenedores
-                    double amplitud = double.Parse(((ConfiguracionSeñalSenoidal) panelConfiguracion.Children[0]).txtAmplitud.Text);
-                    double fase = double.Parse(((ConfiguracionSeñalSenoidal) panelConfiguracion.Children[0]).txtFase.Text);
-                    double frecuencia = double.Parse(((ConfiguracionSeñalSenoidal) panelConfiguracion.Children[0]).txtFrecuencia.Text);
-                    
+                    double amplitud = double.Parse(((ConfiguracionSeñalSenoidal)panelConfiguracion.Children[0]).txtAmplitud.Text);
+                    double fase = double.Parse(((ConfiguracionSeñalSenoidal)panelConfiguracion.Children[0]).txtFase.Text);
+                    double frecuencia = double.Parse(((ConfiguracionSeñalSenoidal)panelConfiguracion.Children[0]).txtFrecuencia.Text);
+
                     señal = new SeñalSenoidal(amplitud, fase, frecuencia);
                     break;
                 //rampa
@@ -55,11 +57,37 @@ namespace GraficadorSeñales
                     señal = new SeñalRampa();
                     break;
                 case 2:
-                    double alpha = double.Parse(((ConfiguracionSeñalExponencial) panelConfiguracion.Children[0]).txtAlpha.Text);
+                    double alpha = double.Parse(((ConfiguracionSeñalExponencial)panelConfiguracion.Children[0]).txtAlpha.Text);
                     señal = new SeñalExponencial(alpha);
                     break;
                 default:
                     señal = null;
+                    break;
+            }
+
+            //Señal 2
+            switch (cbTipoSeñal_SegundaSeñal.SelectedIndex)
+            {
+                //señal senoidal
+                case 0:
+                    //el primer hijo del panel configuracion es la configuracion senoidal y es de otro tipo (ui collection)asi que se hace un casting y asi se puede acceder a sus propiedades, ademas como txtamplitud es tipo texto se usa parse
+                    //nota: los hijos son los elementos de los contenedores
+                    double amplitud = double.Parse(((ConfiguracionSeñalSenoidal)panelConfiguracion_SegundaSeñal.Children[0]).txtAmplitud.Text);
+                    double fase = double.Parse(((ConfiguracionSeñalSenoidal)panelConfiguracion_SegundaSeñal.Children[0]).txtFase.Text);
+                    double frecuencia = double.Parse(((ConfiguracionSeñalSenoidal)panelConfiguracion_SegundaSeñal.Children[0]).txtFrecuencia.Text);
+
+                    segundaSeñal = new SeñalSenoidal(amplitud, fase, frecuencia);
+                    break;
+                //rampa
+                case 1:
+                    segundaSeñal = new SeñalRampa();
+                    break;
+                case 2:
+                    double alpha = double.Parse(((ConfiguracionSeñalExponencial)panelConfiguracion_SegundaSeñal.Children[0]).txtAlpha.Text);
+                    segundaSeñal = new SeñalExponencial(alpha);
+                    break;
+                default:
+                    segundaSeñal = null;
                     break;
             }
 
@@ -68,9 +96,14 @@ namespace GraficadorSeñales
             señal.TiempoFinal = tiempoFinal;
             señal.FrecuenciaMuestreo = frecuenciaMuestreo;
 
-            
+            segundaSeñal.TiempoInicial = tiempoInicial;
+            segundaSeñal.TiempoFinal = tiempoFinal;
+            segundaSeñal.FrecuenciaMuestreo = frecuenciaMuestreo;
+
+
             //se ejecuta la funcion
             señal.construirSeñalDigital();
+            segundaSeñal.construirSeñalDigital();
 
             if ((bool)cbAmplitud.IsChecked)
             {
@@ -86,14 +119,37 @@ namespace GraficadorSeñales
                 señal.desplazar(factorDesplazar);
             }
 
-            if ((bool)cbTruncar.IsChecked)
+            if ((bool)cbTruncar_SegundaSeñal.IsChecked)
             {
                 //Truncar
                 double factorTruncar = double.Parse(txtFactorTruncar.Text);
                 señal.truncar(factorTruncar);
-
-                señal.actualizarAmplitudMaxima();
             }
+
+            //Segunda Señal
+            if ((bool)cbAmplitud_SegundaSeñal.IsChecked)
+            {
+                //Escalar
+                double factorEscala = double.Parse(txtFactorEscalaAmplitud_SegundaSeñal.Text);
+                segundaSeñal.escalar(factorEscala);
+            }
+
+            if ((bool)cbDesplazar_SegundaSeñal.IsChecked)
+            {
+                //Desplazar
+                double factorDesplazar = double.Parse(txtFactorDesplazamiento_SegundaSeñal.Text);
+                segundaSeñal.desplazar(factorDesplazar);
+            }
+
+            if ((bool)cbTruncar_SegundaSeñal.IsChecked)
+            {
+                //Truncar
+                double factorTruncar = double.Parse(txtFactorTruncar_SegundaSeñal.Text);
+                segundaSeñal.truncar(factorTruncar);
+            }
+
+
+            señal.actualizarAmplitudMaxima();
             // limpiar la grafica
             plnGrafica.Points.Clear();
 
@@ -231,7 +287,28 @@ namespace GraficadorSeñales
 
         private void cbTipoSeñal_SegundaSeñal_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //quita los elementos que puede tener el panel
+            panelConfiguracion_SegundaSeñal.Children.Clear();
 
+            switch (cbTipoSeñal_SegundaSeñal.SelectedIndex)
+            {
+                case 0: //senoidal
+                        //se añaden los elementos al panel (los hijos)
+                    panelConfiguracion_SegundaSeñal.Children.Add(
+                      new ConfiguracionSeñalSenoidal()
+                        );
+
+                    break;
+                case 1: //Rampa
+                    break;
+                case 2:
+                    panelConfiguracion_SegundaSeñal.Children.Add(
+                  new ConfiguracionSeñalExponencial()
+                    );
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
