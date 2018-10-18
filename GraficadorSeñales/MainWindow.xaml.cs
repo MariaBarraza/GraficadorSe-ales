@@ -19,7 +19,12 @@ namespace GraficadorSeñales
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
+
+
     {
+        //Guardar la amplitud de la señal mas grande para que ninguna se salga de rango
+        double amplitudMaxima = 1;
+
         public MainWindow()
         {
             InitializeComponent(); //cualquier codigo que se ponga debajo de esta se ejecuta al iniciar el programa
@@ -148,12 +153,25 @@ namespace GraficadorSeñales
                 segundaSeñal.truncar(factorTruncar);
             }
 
+            //Aqui se toma la amplitud maxima de la señal para poder hacer que se tome el valor de la mayor para que se adapte el panel
+    
+            amplitudMaxima = señal.AmplitudMaxima;
+            
+            if(segundaSeñal.AmplitudMaxima> amplitudMaxima)
+            {
+                amplitudMaxima = segundaSeñal.AmplitudMaxima;
+            }
 
-            señal.actualizarAmplitudMaxima();
+            //cambia los valores de la etiqueta
+            //La F es que da el formato para redondear a 2 decimales, la funcion ToString puede recibir un parametro que es el que va a decidir en que formato va a estar,existen varios parametros
+            lblAmplitudMaximaPositivaY.Text = amplitudMaxima.ToString("F");
+            lblAmplitudMaximaNegativaY.Text = "-" + amplitudMaxima.ToString("F");
+
             // limpiar la grafica
             plnGrafica.Points.Clear();
+            plnGraficaDos.Points.Clear();
 
- 
+            //hacerlo si la señal no es nula
            if(señal != null)
             {
                 //recorrer una coleccion o arreglo
@@ -161,13 +179,21 @@ namespace GraficadorSeñales
                 foreach (Muestra muestra in señal.Muestras)
                 {
                     //se evalua la señal, luego se ajusta y de ahi se agrega el punto
-                    plnGrafica.Points.Add(new Point((muestra.X - tiempoInicial) * scrContenedor.Width, (muestra.Y / señal.AmplitudMaxima * ((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
+                    plnGrafica.Points.Add(new Point((muestra.X - tiempoInicial) * scrContenedor.Width, (muestra.Y / amplitudMaxima * ((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
                 }
 
-                //cambiar los valores de la etiqueta
-                //La F es que da el formato para redondear a 2 decimales, la funcion ToString puede recibir un parametro que es el que va a decidir en que formato va a estar,existen varios parametros
-                lblAmplitudMaximaPositivaY.Text = señal.AmplitudMaxima.ToString("F");
-                lblAmplitudMaximaNegativaY.Text = "-" + señal.AmplitudMaxima.ToString("F");
+            }
+            // hacerlo si la Segunda señal no es nula
+            if (segundaSeñal != null)
+            {
+                //recorrer una coleccion o arreglo
+                //muestra toma el valor de señal.muestra en cada recorrido del ciclo
+                foreach (Muestra muestra in segundaSeñal.Muestras)
+                {
+                    //se evalua la señal, luego se ajusta y de ahi se agrega el punto
+                    plnGraficaDos.Points.Add(new Point((muestra.X - tiempoInicial) * scrContenedor.Width, (muestra.Y / amplitudMaxima * ((scrContenedor.Height / 2) - 30) * -1) + (scrContenedor.Height / 2)));
+                }
+
             }
 
             //Graficando el eje de X

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GraficadorSeñales"
         mc:Ignorable="d"
-        Title="MainWindow" Height="530" Width="1067.75">
+        Title="MainWindow" Height="815.611" Width="1067.75">
     <Grid>
         <TextBox x:Name="txtTiempoInicial" HorizontalAlignment="Left" Height="23" Margin="869,40,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
         <TextBlock HorizontalAlignment="Left" Margin="869,17,0,0" TextWrapping="Wrap" Text="Tiempo inicial:" VerticalAlignment="Top"/>
@@ -18,7 +18,9 @@
         <ScrollViewer x:Name="scrContenedor" HorizontalAlignment="Left" Height="220" Margin="73,270,0,0" VerticalAlignment="Top" Width="965" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
             <!-- Se utiliza un panel contenedor para poder tener mas de 1 linea dentro del scrollviewer -->
             <Grid>
-                <Polyline Stroke="Red" StrokeThickness="2" Name="plnGrafica"/>
+                <!--Aqui se crean las lineas de las señales o el plano-->
+                <Polyline Stroke="Blue" StrokeThickness="2" Name="plnGrafica"/>
+                <Polyline Stroke="Red" StrokeThickness="2" Name="plnGraficaDos"/>
                 <Polyline Stroke="Black" StrokeThickness="0.5" Name="plnEjeX"/>
                 <Polyline Stroke="Black" StrokeThickness="0.5" Name="plnEjeY"/>
             </Grid>
@@ -74,6 +76,34 @@
         <TextBox x:Name="txtFactorTruncar_SegundaSeñal" HorizontalAlignment="Left" Height="23" Margin="606,154,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         <TextBlock HorizontalAlignment="Left" Margin="606,132,0,0" TextWrapping="Wrap" Text="Truncar:" VerticalAlignment="Top"/>
         <CheckBox x:Name="cbTruncar_SegundaSeñal" Content="" HorizontalAlignment="Left" Margin="730,159,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.488,-0.227" Checked="cbTruncar_Checked" Unchecked="cbTruncar_UnChecked"/>
+        
+        <ScrollViewer x:Name="scrContenedor_Resultado" HorizontalAlignment="Left" Height="220" Margin="73,553,0,0" VerticalAlignment="Top" Width="965" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
+            <Grid>
+                <Polyline Stroke="Black" StrokeThickness="0.5" x:Name="plnEjeXResultado"/>
+                <Polyline Stroke="Black" StrokeThickness="0.5" x:Name="plnEjeYResultado"/>
+            </Grid>
+
+        </ScrollViewer>
+        
+        <TextBlock x:Name="lblAmplitudMaximaPositivaY_Copy" HorizontalAlignment="Left" Margin="10,571,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="63">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.554"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock x:Name="lblAmplitudMaximaNegativaY_Copy" HorizontalAlignment="Left" Margin="10,745,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="63"/>
+        <TextBlock x:Name="lblAmplitud0_Copy" HorizontalAlignment="Left" Margin="10,665,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="668,220,0,0" TextWrapping="Wrap" Text="Operación" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbTipoOperacion" HorizontalAlignment="Left" Margin="728,217,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem>Suma</ComboBoxItem>
+            <ComboBoxItem>Multiplicación</ComboBoxItem>
+        </ComboBox>
+    
+        <Button x:Name="btnRealizarOperacion" Content="Realizar Operación" HorizontalAlignment="Left" Margin="860,217,0,0" VerticalAlignment="Top" Width="141" Height="25"/>
 
 
     </Grid>
