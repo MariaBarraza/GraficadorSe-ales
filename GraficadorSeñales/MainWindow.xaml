@@ -60,7 +60,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="225,132,0,0" TextWrapping="Wrap" Text="Truncar:" VerticalAlignment="Top"/>
         <CheckBox x:Name="cbTruncar" Content="" HorizontalAlignment="Left" Margin="349,159,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.488,-0.227" Checked="cbTruncar_Checked" Unchecked="cbTruncar_UnChecked"/>
         <StackPanel x:Name="panelConfiguracion_SegundaSeñal" HorizontalAlignment="Left" Height="196" Margin="406,69,0,0" VerticalAlignment="Top" Width="190" RenderTransformOrigin="-0.794,-0.309"/>
-        <ComboBox x:Name="cbTipoSeñal_SegundaSeñal" SelectedIndex="0" HorizontalAlignment="Left" Margin="406,35,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="cbTipoSeñal_SegundaSeñal_SelectionChanged">
+        <ComboBox x:Name="cbTipoSeñal_SegundaSeñal" SelectedIndex="1" HorizontalAlignment="Left" Margin="406,35,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="cbTipoSeñal_SegundaSeñal_SelectionChanged">
             <!-- Se crean las opciones del combobox -->
             <ComboBoxItem Content="Señal Senoidal"/>
             <ComboBoxItem Content="Señal Rampa"/>
@@ -79,13 +79,14 @@
         
         <ScrollViewer x:Name="scrContenedor_Resultado" HorizontalAlignment="Left" Height="220" Margin="73,553,0,0" VerticalAlignment="Top" Width="965" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
             <Grid>
+                <Polyline Stroke="Blue" StrokeThickness="2" Name="plnGraficaResultado"/>
                 <Polyline Stroke="Black" StrokeThickness="0.5" x:Name="plnEjeXResultado"/>
                 <Polyline Stroke="Black" StrokeThickness="0.5" x:Name="plnEjeYResultado"/>
             </Grid>
 
         </ScrollViewer>
         
-        <TextBlock x:Name="lblAmplitudMaximaPositivaY_Copy" HorizontalAlignment="Left" Margin="10,571,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="63">
+        <TextBlock x:Name="lblAmplitudMaximaPositivaY_Resultado" HorizontalAlignment="Left" Margin="10,571,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="63">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -95,15 +96,15 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <TextBlock x:Name="lblAmplitudMaximaNegativaY_Copy" HorizontalAlignment="Left" Margin="10,745,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="63"/>
-        <TextBlock x:Name="lblAmplitud0_Copy" HorizontalAlignment="Left" Margin="10,665,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="lblAmplitudMaximaNegativaY_Resultado" HorizontalAlignment="Left" Margin="10,745,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="63"/>
+        <TextBlock x:Name="lblAmplitud0_Resultado" HorizontalAlignment="Left" Margin="10,665,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="668,220,0,0" TextWrapping="Wrap" Text="Operación" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbTipoOperacion" HorizontalAlignment="Left" Margin="728,217,0,0" VerticalAlignment="Top" Width="120">
+        <ComboBox x:Name="cbTipoOperacion" HorizontalAlignment="Left" Margin="728,217,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
             <ComboBoxItem>Suma</ComboBoxItem>
             <ComboBoxItem>Multiplicación</ComboBoxItem>
         </ComboBox>
     
-        <Button x:Name="btnRealizarOperacion" Content="Realizar Operación" HorizontalAlignment="Left" Margin="860,217,0,0" VerticalAlignment="Top" Width="141" Height="25"/>
+        <Button x:Name="btnRealizarOperacion" Content="Realizar Operación" HorizontalAlignment="Left" Margin="860,217,0,0" VerticalAlignment="Top" Width="141" Height="25" Click="btnRealizarOperacion_Click"/>
 
 
     </Grid>
