@@ -98,11 +98,12 @@ namespace GraficadorSeñales
             //construimos la señal resultado
             SeñalPersonalizada resultado = new SeñalPersonalizada();
 
-            //sumamos muestra por muestra
+            //tomamos los valores de tiempo y muestreo
             resultado.TiempoInicial = sumando1.TiempoInicial;
             resultado.TiempoFinal = sumando1.TiempoFinal;
             resultado.FrecuenciaMuestreo = sumando1.FrecuenciaMuestreo;
 
+            //sumamos muestra por muestra
             //recorremos 1 lista de muestras y a la 2 señal accedemos por un indice
             int indice = 0;
             foreach(Muestra muestra in sumando1.Muestras)
@@ -110,6 +111,26 @@ namespace GraficadorSeñales
                 Muestra muestraResultado = new Muestra();
                 muestraResultado.X = muestra.X;
                 muestraResultado.Y = muestra.Y + sumando2.Muestras[indice].Y;
+                indice++;
+                resultado.Muestras.Add(muestraResultado);
+            }
+
+            return resultado;
+        }
+
+        public static Señal multiplicar(Señal factor1,Señal factor2)
+        {
+            SeñalPersonalizada resultado = new SeñalPersonalizada();
+            resultado.TiempoInicial = factor1.TiempoInicial;
+            resultado.TiempoFinal = factor1.TiempoFinal;
+            resultado.FrecuenciaMuestreo = factor1.FrecuenciaMuestreo;
+
+            int indice = 0;
+            foreach (Muestra muestra in factor1.Muestras)
+            {
+                Muestra muestraResultado = new Muestra();
+                muestraResultado.X = muestra.X;
+                muestraResultado.Y = muestra.Y * factor2.Muestras[indice].Y;
                 indice++;
                 resultado.Muestras.Add(muestraResultado);
             }
