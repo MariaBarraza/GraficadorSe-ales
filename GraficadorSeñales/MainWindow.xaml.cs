@@ -67,6 +67,9 @@ namespace GraficadorSeñales
                     double alpha = double.Parse(((ConfiguracionSeñalExponencial)panelConfiguracion.Children[0]).txtAlpha.Text);
                     señal = new SeñalExponencial(alpha);
                     break;
+                case 3:
+                    señal = new SeñalRectangular();
+                    break;
                 default:
                     señal = null;
                     break;
@@ -92,6 +95,9 @@ namespace GraficadorSeñales
                 case 2:
                     double alpha = double.Parse(((ConfiguracionSeñalExponencial)panelConfiguracion_SegundaSeñal.Children[0]).txtAlpha.Text);
                     segundaSeñal = new SeñalExponencial(alpha);
+                    break;
+                case 3:
+                    segundaSeñal = new SeñalRectangular();
                     break;
                 default:
                     segundaSeñal = null;

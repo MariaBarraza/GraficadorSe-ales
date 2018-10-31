@@ -65,6 +65,7 @@
     <Compile Include="SeñalExponencial.cs" />
     <Compile Include="SeñalPersonalizada.cs" />
     <Compile Include="SeñalRampa.cs" />
+    <Compile Include="SeñalRectangular.cs" />
     <Compile Include="SeñalSenoidal.cs" />
     <Page Include="ConfiguracionSeñalExponencial.xaml">
       <Generator>MSBuild:Compile</Generator>
