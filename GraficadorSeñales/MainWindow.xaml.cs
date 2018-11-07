@@ -398,9 +398,9 @@ namespace GraficadorSeñales
             //Graficando el eje de Y
             plnEjeYResultado.Points.Clear();
             //Punto de inicio.
-            plnEjeYResultado.Points.Add(new Point(0 - señalResultado.TiempoInicial * scrContenedor_Resultado.Width, scrContenedor_Resultado.Height));
+            plnEjeYResultado.Points.Add(new Point((0 - señalResultado.TiempoInicial) * scrContenedor_Resultado.Width,(((scrContenedor_Resultado.Height/2.0)-30)*-1) + (scrContenedor_Resultado.Height/2)));
             //Punto de fin.
-            plnEjeYResultado.Points.Add(new Point(0 - señalResultado.TiempoInicial * scrContenedor_Resultado.Width, scrContenedor_Resultado.Height * -1));
+            plnEjeYResultado.Points.Add(new Point((0 - señalResultado.TiempoInicial) * scrContenedor_Resultado.Width, (-1 * ((scrContenedor_Resultado.Height / 2.0)-30) * -1) + (scrContenedor_Resultado.Height/2)));
 
         }
     }

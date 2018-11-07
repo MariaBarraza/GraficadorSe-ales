@@ -167,6 +167,9 @@ namespace GraficadorSeñales
                         valorMuestraY += operando1.Muestras[k].Y * operando2.Muestras[n - k].Y;
                     } 
                 }
+
+                valorMuestraY /= resultado.FrecuenciaMuestreo;
+
                 Muestra muestra = new Muestra(instanteActual, valorMuestraY);
                 resultado.Muestras.Add(muestra);
                 instanteActual += periodoMuestreo;
